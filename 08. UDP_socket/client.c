@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     int sockfd, n;
     char buf[BUFSIZ];
 
-    sockfd = socket(AF_INET, SOCK_DGRAM, 0);
+    sockfd = socket(AF_INET, SOCK_DGRAM, 0);        // UDP SOCK_DGRAM 数据报套接字 
 
     bzero(&servaddr, sizeof(servaddr));
     servaddr.sin_family = AF_INET;
@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     bind(sockfd, (struct sockaddr *)&servaddr, sizeof(servaddr));
 
     while (fgets(buf, BUFSIZ, stdin) != NULL) {
-        n = sendto(sockfd, buf, strlen(buf), 0, (struct sockaddr *)&servaddr, sizeof(servaddr));
+        n = sendto(sockfd, buf, strlen(buf), 0, (struct sockaddr *)&servaddr, sizeof(servaddr));        // sendto
         if (n == -1)
             perror("sendto error");
 

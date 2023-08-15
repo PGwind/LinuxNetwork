@@ -15,7 +15,7 @@ int main(void)
     char str[INET_ADDRSTRLEN];
     int i, n;
 
-    sockfd = socket(AF_INET, SOCK_DGRAM, 0);
+    sockfd = socket(AF_INET, SOCK_DGRAM, 0);    // UDP SOCK_DGRAM 数据报套接字 
 
     bzero(&serv_addr, sizeof(serv_addr));
     serv_addr.sin_family = AF_INET;
@@ -27,7 +27,7 @@ int main(void)
     printf("Accepting connections ...\n");
     while (1) {
         clie_addr_len = sizeof(clie_addr);
-        n = recvfrom(sockfd, buf, BUFSIZ,0, (struct sockaddr *)&clie_addr, &clie_addr_len);
+        n = recvfrom(sockfd, buf, BUFSIZ,0, (struct sockaddr *)&clie_addr, &clie_addr_len);     // recvfrom
         if (n == -1)
             perror("recvfrom error");
 
@@ -38,7 +38,7 @@ int main(void)
         for (i = 0; i < n; i++)
             buf[i] = toupper(buf[i]);
 
-        n = sendto(sockfd, buf, n, 0, (struct sockaddr *)&clie_addr, sizeof(clie_addr));
+        n = sendto(sockfd, buf, n, 0, (struct sockaddr *)&clie_addr, sizeof(clie_addr));        // sendto
         if (n == -1)
             perror("sendto error");
     }
